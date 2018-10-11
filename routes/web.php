@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+Route::pattern('id', '[0-9]+');
 
 Route::get('/', 'ExamController@index')->name('index');
 
@@ -17,6 +18,7 @@ Auth::routes();
 
 Route::get('/home', 'ExamController@index')->name('home');
 
+Route::get('/exam/{id}', 'ExamController@show')->name('exam.show');
 Route::get('/exam', 'ExamController@index')->name('exam.index');
 Route::get('/exam/create', 'ExamController@create')->name('exam.create');
 Route::post('/exam', 'ExamController@store')->name('exam.store');
