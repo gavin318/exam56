@@ -2,10 +2,7 @@
 @section('content')
     <h1 class="text-center">{{$exam->title}}</h1>
 
-    <div class="text-center">
-        發佈於 {{$exam->created_at->format("Y年m月d日 H:i:s")}} / 最後更新： {{$exam->updated_at->format("Y年m月d日 H:i:s")}}
-    </div>
-
+    {{-- 題目表單 --}}
     @can('建立測驗')
     {{ bs()->openForm('post', '/topic') }}
         {{ bs()->formGroup()
@@ -44,5 +41,32 @@
                 ->control(bs()->submit('儲存'))
                 ->showAsRow() }}
     {{ bs()->closeForm() }}
-@endcan
+    @endcan
+
+    {{-- 題目列表 --}}
+    @forelse ($topics as $key => $topic)
+        <dl>
+            <dt class="h3">
+                @can('建立測驗')
+                    （{{$topic->ans}}）
+                @endcan
+                <span class="badge badge-success">{{$key+1}}</span>
+                {{$topic->topic}}
+            </dt>
+            <dd class="opt">
+                {{bs()->radioGroup("ans[$topic->id]",[
+                    1=>"&#10102; $topic->opt1", 
+                    2=>"&#10103; $topic->opt2", 
+                    3=>"&#10104; $topic->opt3", 
+                    4=>"&#10105; $topic->opt4"])
+                        ->addRadioClass(['my-1', 'mx-3'])}}
+            </dd>
+        </dl>
+    @empty
+        <div class="alert alert-danger">尚無測驗題目</div>        
+    @endforelse
+
+    <div class="text-center">
+        發佈於 {{$exam->created_at->format("Y年m月d日 H:i:s")}} / 最後更新： {{$exam->updated_at->format("Y年m月d日 H:i:s")}}
+    </div>
 @endsection
