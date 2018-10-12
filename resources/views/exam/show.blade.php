@@ -44,7 +44,7 @@
     @endcan
 
     {{-- 題目列表 --}}
-    @forelse ($topics as $key => $topic)
+    @forelse ($exam->topics as $key => $topic)
         <dl>
             <dt class="h3">
                 @can('建立測驗')
