@@ -59,6 +59,7 @@
                     2=>"&#10103; $topic->opt2", 
                     3=>"&#10104; $topic->opt3", 
                     4=>"&#10105; $topic->opt4"])
+                        ->selectedOption((Auth::user() and Auth::user()->can('建立測驗'))?$topic->ans:0)
                         ->addRadioClass(['my-1', 'mx-3'])}}
             </dd>
         </dl>
