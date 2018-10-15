@@ -70,9 +70,10 @@ class TopicController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TopicRequest $request, $id)
+    public function update(TopicRequest $request, Topic $topic)
     {
-        //
+        $topic->update($request->all());
+        return redirect()->route('exam.show', $topic->exam_id);
     }
 
     /**
