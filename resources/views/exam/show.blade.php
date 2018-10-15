@@ -3,13 +3,17 @@
     <h1 class="text-center">
         {{$exam->title}}
         @can('建立測驗')
-    <a href="{{route('exam.edit', $exam->id)}}" class="btn btn-warning">編輯</a>
+            <a href="{{route('exam.edit', $exam->id)}}" class="btn btn-warning">編輯</a>
         @endcan
     </h1>
 
     {{-- 題目表單 --}}
     @can('建立測驗')
-    {{ bs()->openForm('post', '/topic') }}
+        @if(isset($topic))
+            {{ bs()->openForm('patch', "/topic/{$topic->id}", ['model' => $topic]) }}
+        @else
+            {{ bs()->openForm('post', '/topic') }}
+        @endif
         {{ bs()->formGroup()
                 ->label('題目內容', false, 'text-sm-right')
                 ->control(bs()->textarea('topic')->placeholder('請輸入題目內容'))
@@ -53,6 +57,7 @@
         <dl>
             <dt class="h3">
                 @can('建立測驗')
+                    <a href="{{route('topic.edit', $topic->id)}}" class="btn btn-warning">編輯</a>
                     （{{$topic->ans}}）
                 @endcan
                 <span class="badge badge-success">{{$key+1}}</span>
