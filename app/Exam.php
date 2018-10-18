@@ -18,4 +18,9 @@ class Exam extends Model
     {
         return $this->hasMany('App\Topic');
     }
+
+    public function tests()
+    {
+        return $this->hasMany('App\Test');
+    }
 }
