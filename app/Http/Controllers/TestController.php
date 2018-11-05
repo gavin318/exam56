@@ -51,11 +51,16 @@ class TestController extends Controller
 
         $score = 100 * round($right_num / $show_num, 2);
 
+        $class_info = session('pref/language');
+
         $test = Test::create([
             'content' => $content,
             'user_id' => $request->user_id,
             'exam_id' => $request->exam_id,
             'score'   => $score,
+            'grade'   => substr($class_info, 0, 2),
+            'class'   => substr($class_info, 2, 2),
+            'num'     => substr($class_info, 4, 2),
         ]);
         return redirect()->route('test.show', $test->id);
     }

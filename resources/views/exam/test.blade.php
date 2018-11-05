@@ -6,7 +6,7 @@
             <h3>時間：<u>{{$test->created_at->format("Y年m月d日 H:i:s")}}</u></h3>
         </div>
         <div class="col-sm-6 text-right">
-            <h3>姓名：<u>{{$test->user->name}}</u> 得分：<b class="
+            <h3><u> {{ $test->grade }} </u>年<u> {{ $test->class }} </u>班<u> {{ $test->num }} </u>號 姓名：<u>{{$test->user->name}}</u> 得分：<b class="
             @if($test->score >= 60)
                 text-info
             @else
