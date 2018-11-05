@@ -160,6 +160,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        T301000\LaravelNtpcOpenid\NtpcOpenidServiceProvider::class,
+
     ],
 
     /*
